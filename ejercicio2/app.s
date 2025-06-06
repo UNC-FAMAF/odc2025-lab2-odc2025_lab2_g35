@@ -558,5 +558,49 @@ dibuja_trapecio:
 
  ret
 
+ //------------------------------------------------- SUB CUADRADO ----------------------------------------//
+
+dibuja_cuadrado:
+
+ // coordenadas en las que empieza, alto y ancho del cuadrado
+ // x21 x_start
+ // x22 y_start
+ // x23 ancho
+ // X24 alto
+ // x15 color
+
+ // inicializo filas y columnas (es como un ciclo anidado)
+ mov x25, #0 // dir_y = 0 (filas)
+loop4:
+ mov x26, #0 // dir_x = 0 (columnas)
+loop3:
+
+ // calculo coordenadas
+ add x3, x26, x21 // x
+ add x4, x25, x22 // y
+
+ // calculo direccion en memoria
+ // Dirección = Dirección de inicio + 4 * [x + (y * 640)]
+
+ mov x6, #640
+ mul x5, x4, x6 // y * 640->(SCREEN_WIDTH)
+ add x5, x5, x3 // x + (y*640)
+ lsl x5, x5, #2 // 4*(x+(y*640))
+ add x7, x0, x5 // dir base + 4 * [x + (y * 640)]
+
+ stur w15, [x7] // pinto el pixel de negro
+
+ // sumo 1 a las columnas
+ add x26, x26, #1
+ cmp x26, x23
+ b.lt loop3
+
+ // sumo 1 a las filas
+ add x25, x25, #1
+ cmp x25, x24
+ b.lt loop4
+ 
+ ret
+
 InfLoop:
 	b InfLoop
