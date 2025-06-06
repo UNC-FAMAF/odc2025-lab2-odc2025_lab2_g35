@@ -602,5 +602,56 @@ loop3:
  
  ret
 
+//------------------------------------------------- SUB TRIÁNGULO ----------------------------------------//
+
+dibuja_triangulo:
+ // x21: x_start
+ // x22: y_start
+ // x23: base (ancho de la base del triángulo)
+ // x24: altura (altura del triángulo)
+ // x15: color (nuevo parámetro para el color)
+
+ mov x10, 0 // fila y actual (dy)
+loop_tri_y:
+
+ // Calculo el ancho de cada fila según la proporción de la altura
+ // ancho_actual = base * (dy / altura)
+
+ mul x11, x23, x10 // base * dy
+ udiv x11, x11, x24 // (base * dy) / altura
+
+ // Calcula la posición de inicio de la fila actual
+ // x_offset = x_start - ancho_actual / 2
+ lsr x13, x11, 1
+ sub x12, x21, x13
+
+ // y = y_start + dy
+ add x4, x22, x10
+
+ // Ciclo para columnas
+ mov x9, 0 // columna x actual (dx)
+
+loop_tri_x:
+ add x3, x12, x9 // x = x_offset + col
+
+ // Dirección = base + 4 * (x + y * SCREEN_WIDTH)
+ mov x7, SCREEN_WIDTH
+ mul x8, x4, x7
+ add x8, x8, x3
+ lsl x8, x8, 2
+ add x8, x0, x8
+
+ stur w15, [x8] // colorear el pixel con x15
+
+ add x9, x9, 1
+ cmp x9, x11 // dx < ancho_actual
+ blt loop_tri_x
+ // siguiente fila
+ add x10, x10, 1
+ cmp x10, x24 // dy < altura
+ blt loop_tri_y
+
+ ret
+ 
 InfLoop:
 	b InfLoop
