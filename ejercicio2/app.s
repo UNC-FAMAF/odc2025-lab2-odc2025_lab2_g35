@@ -708,6 +708,9 @@ movk x15, 0x0028, lsl 16
 movk x15, 0x00FF, lsl 32
 bl dibuja_trapecio
 
+bl dibuja_montañas
+bl dibuja_auto
+
 //------------------ ACTUALIZA Y ----------------//
 add x27, x27, #15       // desplaza la línea hacia abajo
 cmp x27, #480
@@ -715,9 +718,24 @@ blt continuar_linea
 mov x27, #350          // vuelve a mitad de pantalla
 continuar_linea:
 
+//------------------ BORRA NUBES (mismo que antes) ----------------//
+movz x15, 0x95ED, lsl 00 // color de cielo
+movk x15, 0xFF64, lsl 16
+add x21, x19, #300
+sub x21, x21, #1
+mov x22, #50
+bl dibuja_nubes
 
-bl dibuja_montañas
-bl dibuja_auto
+add x21, x28, #400
+sub x21, x21, #2
+mov x22, #110
+bl dibuja_nubes
+
+add x21, x28, #120
+sub x21, x21, #2
+mov x22, #150
+bl dibuja_nubes
+
  
 InfLoop:
 	b InfLoop
