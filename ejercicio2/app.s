@@ -64,6 +64,100 @@ loop0b:
 mov x27, #300  
 b loop_animacion
 
+//------------------------------------------------ SUBRUTINAS -------------------------------------------------//
+
+//------------------------------------------------ SUB AUTO -------------------------------------------------//
+dibuja_auto:
+ str x30, [sp, #-16]!
+  //--------- PARTE DE LUCES Y PATENTE --------//
+ mov x21, #225
+ mov x22, #300
+ mov x23, #200
+ mov x24, #60
+ movz x15, 0x0000, lsl 00 // rojo
+ movk x15, 0x00C8, lsl 16
+ movk x15, 0x00FF, lsl 32
+ bl dibuja_cuadrado
+
+//-------------- PARTE DE ABAJO ---------------//
+ mov x21, #222
+ mov x22, #360
+ mov x23, #205
+ mov x24, #25
+ movz x15, 0x4010, lsl 00 // rojo anaranjado
+ movk x15, 0x00C0, lsl 16
+ movk x15, 0x00FF, lsl 16
+ bl dibuja_cuadrado
+
+ //------------------- PARTE DEL BAUL --------------------//
+ mov x21, #325
+ mov x22, #280
+ mov x23, #180
+ mov x24, #200
+ mov x25, #20
+ bl dibuja_trapecio
+
+//----------------- LUZ 1 ----------------//
+ mov x21, #225
+ mov x22, #320
+ mov x23, #40
+ mov x24, #20
+ movz x15, 0xFF00, lsl 00 // amarillo
+ movk x15, 0x00FF, lsl 16
+ movk x15, 0x00FF, lsl 32
+ bl dibuja_cuadrado
+
+//---------------- LUZ 2 ----------------//
+ mov x21, #385
+ mov x22, #320
+ mov x23, #40
+ mov x24, #20
+ bl dibuja_cuadrado
+
+//----------- PATENTE DEL AUTO ------------//
+ mov x21, #298
+ mov x22, #320
+ mov x23, #55
+ mov x24, #35
+ movz x15, 0xFFFF, lsl 00 // blanco
+ movk x15, 0xFFFF, lsl 16
+ movk x15, 0xFFFF, lsl 32
+ bl dibuja_cuadrado
+
+ //--------- PARTE DE ARRIBA (TECHO) ------------//
+ mov x21, #325
+ mov x22, #230
+ mov x23, #140
+ mov x24, #170
+ mov x25, #50
+ movz x15, 0x4010, lsl 00 // rojo anaranjado
+ movk x15, 0x00C0, lsl 16
+ movk x15, 0x00FF, lsl 16
+ bl dibuja_trapecio
+
+ //-------------- VENTANA TRASERA -----------------//
+ mov x21, #325
+ mov x22, #240
+ mov x23, #120
+ mov x24, #140
+ mov x25, #40
+ movz x15, 0x1E1E, lsl 00 // gris oscuro sombra
+ movk x15, 0x001E, lsl 16
+ movk x15, 0x00FF, lsl 32
+ bl dibuja_trapecio
+
+ //-------- RUEDA 1 ------------//
+ mov x21, #235
+ mov x22, #385
+ mov x23, #45
+ mov x24, #30
+ movz x15, 0x00, lsl 00 // negro
+ bl dibuja_cuadrado
+
+ //-------- RUEDA 2 ----------//
+ mov x21, #370
+ bl dibuja_cuadrado
+
 
 InfLoop:
 	b InfLoop
