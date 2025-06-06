@@ -459,5 +459,44 @@ dibuja_nubes:
 
  ret
 
+//------------------------------------------------- SUB CIRCULOS ----------------------------------------//
+dibuja_circulos:
+ mul x6, x5, x5 // radio^2
+ sub x8, x3, x5 // x_min = centro_x - radio
+ add x9, x3, x5 // x_max = centro_x + radio
+ sub x11, x4, x5 // y_min = centro_y - radio
+ add x12, x4, x5 // y_max = centro_y + radio
+
+loop_circ_y:
+ mov x2, x8 // x = x_min
+loop_circ_x:
+ // dx = x - cx
+ sub x13, x2, x3
+ mul x13, x13, x13 // dx^2
+ // dy = y - cy
+ sub x14, x11, x4
+ mul x14, x14, x14 // dy^2
+ add x7, x13, x14 // dx^2 + dy^2
+ cmp x7, x6
+ b.ge skip
+
+ // Calcula offset = (y * WIDTH + x) * 4
+ mov x16, SCREEN_WIDTH
+ mul x17, x11, x16
+ add x17, x17, x2
+ lsl x17, x17, 2 // * 4
+ add x17, x17, x20 // framebuffer + framebuffer base
+ stur w15, [x17] // escribir pixel
+
+skip:
+ add x2, x2, 1
+ cmp x2, x9
+ ble loop_circ_x
+
+ add x11, x11, 1
+ cmp x11, x12
+ ble loop_circ_y
+ ret
+
 InfLoop:
 	b InfLoop
