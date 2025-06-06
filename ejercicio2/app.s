@@ -158,6 +158,170 @@ dibuja_auto:
  mov x21, #370
  bl dibuja_cuadrado
 
+ //------------------------------------------ PATENTE ------------------------------------------------------------//
+
+ //---------- PRIMER LETRA -----------//
+ mov x21, #300
+ mov x22, #323
+ mov x24, #12
+ mov x23, #3
+ movz x15, 0x0000, lsl 00
+ bl dibuja_cuadrado
+
+ mov x21, #309
+ bl dibuja_cuadrado
+
+ mov x21, #302
+ mov x22, #321
+ mov x24, #3
+ mov x23, #8
+ bl dibuja_cuadrado
+
+ mov x22, #334
+ bl dibuja_cuadrado
+
+ //--------- SEGUNDA LETRA ------------//
+ mov x21, #320
+ mov x22, #323
+ mov x24, #12
+ mov x23, #3
+ bl dibuja_cuadrado
+
+ mov x21, #328
+ bl dibuja_cuadrado
+
+ mov x21, #320
+ mov x22, #321
+ mov x24, #3
+ mov x23, #9
+ bl dibuja_cuadrado
+
+ mov x22, #334 // y
+ bl dibuja_cuadrado
+
+ //--------- TERCER LETRA -----------//
+ mov x21, #338
+ mov x22, #323
+ mov x24, #12
+ mov x23, #3
+ bl dibuja_cuadrado
+
+ mov x21, #341
+ mov x22, #321
+ mov x24, #3
+ mov x23, #7
+ bl dibuja_cuadrado
+
+ mov x21, #340
+ mov x22, #334
+ mov x23, #8
+ bl dibuja_cuadrado
+
+ mov x21, #347
+ mov x22, #323
+ mov x23, #3
+ bl dibuja_cuadrado
+
+ mov x21, #347
+ mov x22, #332
+ bl dibuja_cuadrado
+
+ //--------- PRIMER NUMERO ----------//
+ mov x21, #300
+ mov x22, #350
+ mov x23, #9
+ bl dibuja_cuadrado
+
+ mov x22, #347
+ mov x23, #3
+ bl dibuja_cuadrado
+
+ mov x21, #303
+ mov x22, #344
+ bl dibuja_cuadrado
+
+ mov x21, #306
+ mov x22, #341
+ bl dibuja_cuadrado
+
+ mov x21, #300
+ mov x22, #339
+ mov x23, #7
+ bl dibuja_cuadrado
+
+ //-------- SEGUNDO NUMERO ----------//
+ mov x21, #313
+ mov x22, #341
+ mov x24, #11
+ mov x23, #3
+ bl dibuja_cuadrado
+
+ mov x21, #322
+ bl dibuja_cuadrado
+
+ mov x21, #315
+ mov x22, #339
+ mov x24, #3
+ mov x23, #8
+ bl dibuja_cuadrado
+
+ mov x22, #350
+ bl dibuja_cuadrado
+
+ //---------- TERCER NUMERO ----------//
+ mov x21, #328
+ mov x22, #350
+ mov x24, #3
+ mov x23, #9
+ bl dibuja_cuadrado
+
+ mov x22, #347
+ mov x23, #3
+ bl dibuja_cuadrado
+
+ mov x21, #331
+ mov x22, #344
+ bl dibuja_cuadrado
+
+ mov x21, #334
+ mov x22, #341
+ bl dibuja_cuadrado
+
+ mov x21, #328
+ mov x22, #339
+ mov x23, #7
+ bl dibuja_cuadrado
+
+ //---------- CUARTO NUMERO -------------//
+ mov x21, #348
+ mov x22, #345
+ mov x24, #6
+ mov x23, #3
+ bl dibuja_cuadrado
+
+ mov x21, #342
+ mov x22, #350
+ mov x24, #3
+ mov x23, #7
+ bl dibuja_cuadrado
+
+ mov x21, #342
+ mov x22, #344
+ bl dibuja_cuadrado
+
+ mov x22, #341
+ mov x24, #7
+ mov x23, #3
+ bl dibuja_cuadrado
+
+ mov x21, #342
+ mov x22, #339
+ mov x24, #3
+ mov x23, #9
+ bl dibuja_cuadrado
+ldr x30, [sp], #16
+ret
+
 
 InfLoop:
 	b InfLoop
