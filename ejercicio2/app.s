@@ -652,6 +652,45 @@ loop_tri_x:
  blt loop_tri_y
 
  ret
+
+//------------------------------------------------- ANIMACIÓN -----------------------------------------------------//
+
+loop_animacion:
+
+//------------------ NUBE 1 ----------------//
+movz x15, 0xFFDA, lsl 0 // gris claro
+movk x15, 0xD9DE, lsl 16
+mov x0, x20
+add x21, x19, #300
+mov x22, #50
+bl dibuja_nubes
+
+//------------------ NUBE 2 ---------------//
+mov x0, x20
+add x21, x28, #400
+mov x22, #110
+bl dibuja_nubes
+
+//------------------- NUBE 3 --------------//
+mov x0, x20
+add x21, x28, #120
+mov x22, #150
+bl dibuja_nubes
+
+//------------------- LÍNEA AMARILLA MOVIBLE ----------------//
+mov x0, x20
+mov x21, #320     // x centrado
+mov x22, x27      // y dinámico
+mov x23, #35      // ancho superior
+mov x24, #50      // ancho inferior
+mov x25, #50      // altura
+movz x15, 0xFF00, lsl 00 // color amarillo
+movk x15, 0x00FF, lsl 16
+movk x15, 0x00FF, lsl 32
+bl dibuja_trapecio
+
+bl dibuja_montañas
+bl dibuja_auto
  
 InfLoop:
 	b InfLoop
