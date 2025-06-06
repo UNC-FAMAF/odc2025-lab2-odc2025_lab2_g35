@@ -689,6 +689,33 @@ movk x15, 0x00FF, lsl 16
 movk x15, 0x00FF, lsl 32
 bl dibuja_trapecio
 
+//---------------- DELAY ----------------//
+movz x10, 0xFFFF, lsl 0
+movk x10, 0x00AF, lsl 16
+delay:
+subs x10, x10, #1
+b.ne delay
+
+//------------------ BORRA LA LÍNEA AMARILLA ----------------//
+mov x0, x20
+mov x21, #320     // x centrado
+mov x22, x27      // y de la línea
+mov x23, #35      // ancho superior
+mov x24, #50      // ancho inferior
+mov x25, #50      // altura
+movz x15, 0x2828, lsl 00     // gris oscuro (color de la calle)
+movk x15, 0x0028, lsl 16
+movk x15, 0x00FF, lsl 32
+bl dibuja_trapecio
+
+//------------------ ACTUALIZA Y ----------------//
+add x27, x27, #15       // desplaza la línea hacia abajo
+cmp x27, #480
+blt continuar_linea
+mov x27, #350          // vuelve a mitad de pantalla
+continuar_linea:
+
+
 bl dibuja_montañas
 bl dibuja_auto
  
