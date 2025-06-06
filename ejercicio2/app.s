@@ -419,5 +419,45 @@ dibuja_montañas:
 
  ret
 
+ //------------------------------------------------ SUB NUBES ----------------------------------------------//
+dibuja_nubes:
+ // x0 base_fb
+ // x21 x_base
+ // x22 y_base
+ // x15 color
+
+ str x30, [sp, #-16]! // x30 return address
+
+ // círculo central
+ mov x3, x21
+ mov x4, x22
+ mov x5, #30
+ bl dibuja_circulos
+
+ // círculo izquierda
+ sub x3, x21, #25
+ add x4, x22, #5
+ mov x5, #25
+ bl dibuja_circulos
+
+ // círculo derecha
+ add x3, x21, #25
+ add x4, x22, #5
+ bl dibuja_circulos
+
+ // círculo arriba izquierda
+ sub x3, x21, #10
+ sub x4, x22, #15
+ bl dibuja_circulos
+
+ // círculo arriba derecha
+ add x3, x21, #10
+ sub x4, x22, #15
+ bl dibuja_circulos
+
+ ldr x30, [sp], #16
+
+ ret
+
 InfLoop:
 	b InfLoop
