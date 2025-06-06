@@ -49,5 +49,21 @@ loop0b:
 
  mov x0, x20
 
+  //------------------------------------------------- CALLE -----------------------------------------------------//
+ 
+ mov x21, #320 // (centrado a la mitad de la pantalla)
+ mov x22, #240 // (centrado a la mitad de la pantalla)
+ mov x23, #150
+ mov x24, #620
+ mov x25, #240
+ movz x15, 0x2828, lsl 00 //gris re oscuro
+ movk x15, 0x0028, lsl 16
+ movk x15, 0x00FF, lsl 32
+ bl dibuja_trapecio
+
+mov x27, #300  
+b loop_animacion
+
+
 InfLoop:
 	b InfLoop
