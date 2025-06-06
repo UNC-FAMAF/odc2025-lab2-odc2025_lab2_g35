@@ -689,6 +689,9 @@ movk x15, 0x00FF, lsl 16
 movk x15, 0x00FF, lsl 32
 bl dibuja_trapecio
 
+bl dibuja_montañas
+bl dibuja_auto
+
 //---------------- DELAY ----------------//
 movz x10, 0xFFFF, lsl 0
 movk x10, 0x00AF, lsl 16
@@ -707,9 +710,6 @@ movz x15, 0x2828, lsl 00     // gris oscuro (color de la calle)
 movk x15, 0x0028, lsl 16
 movk x15, 0x00FF, lsl 32
 bl dibuja_trapecio
-
-bl dibuja_montañas
-bl dibuja_auto
 
 //------------------ ACTUALIZA Y ----------------//
 add x27, x27, #15       // desplaza la línea hacia abajo
@@ -735,6 +735,27 @@ add x21, x28, #120
 sub x21, x21, #2
 mov x22, #150
 bl dibuja_nubes
+
+//----------- ACTUALIZA DESPLAZAMIENTO DE NUBES -----------//
+add x19, x19, #1
+cmp x19, #640
+blt continuar1
+mov x19, #0
+continuar1:
+
+add x28, x28, #1
+cmp x28, #640
+blt continuar2
+mov x28, #0
+continuar2:
+
+add x29, x29, #1
+cmp x29, #640
+blt continuar3
+mov x29, #0
+continuar3:
+
+b loop_animacion
 
  
 InfLoop:
