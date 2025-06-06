@@ -498,5 +498,65 @@ skip:
  ble loop_circ_y
  ret
 
+ //------------------------------------------------- SUB TRAPECIO ----------------------------------------//
+
+dibuja_trapecio:
+
+ // x21: x_start x del centro superior del trapecio (por ejemplo, 320 si está centrado)
+ // x22: y_start y inicial (arriba del trapecio)
+ // x23: ancho superior
+ // x24: ancho inferior
+ // x25: altura
+ // x15: color
+
+ mov x10, #0 // fila y actual (dy)
+ loop_trp_y:
+
+ // para calcular el ancho de cada fila:
+ // ancho_actual = a_sup + (a_inf - a_sup) * (dy / altura)
+
+ sub x11, x24, x23 // a_inf - a_sup
+ mul x11, x11, x10 // (a_inf - a_sup) * dy
+ udiv x11, x11, x25 // (a_inf - a_sup) * dy / altura
+ add x11, x11, x23 // ancho actual = a_sup + (a_inf - a_sup) * (dy / altura)
+
+ // calculo donde va a empezar a pintar (x_offset)
+ // x_offset = x_start - ancho_actual / 2
+ lsr x13, x11, #1
+ sub x12, x21, x13
+
+ // y = y_start + dy
+ add x4, x22, x10
+
+ // NOTA: x11: ancho_actual
+ // x13: mitad del ancho
+ // x12: coordenada x inicial de la fila actual
+
+ // Ciclo para columnas
+ mov x9, #0 // columna x actual (dx)
+
+ loop_trp_x:
+ add x3, x12, x9 // x = x_offset + col
+
+ // Dirección = base + 4 * (x + y * SCREEN_WIDTH)
+ mov x7, #640
+ mul x8, x4, x7
+ add x8, x8, x3
+ lsl x8, x8, #2
+ add x8, x0, x8
+
+ stur w15, [x8]
+
+ add x9, x9, #1
+ cmp x9, x11 // dx < ancho_actual
+ blt loop_trp_x
+
+ // siguiente fila
+ add x10, x10, #1
+ cmp x10, x25 // dy < altura
+ blt loop_trp_y
+
+ ret
+
 InfLoop:
 	b InfLoop
