@@ -322,6 +322,102 @@ dibuja_auto:
 ldr x30, [sp], #16
 ret
 
+//----------------------------------------- SUB MONTAÑAS ------------------------------------------------------//
+
+dibuja_montañas:
+
+ str x30, [sp, #-16]!
+
+ //---------------------- MONTAÑA 1 ----------------------//
+ mov x21, 280 // posición x
+ mov x22, 70 // posición y
+ mov x23, 190 // ancho de la base
+ mov x24, 170 // altura
+ movz x15, 0x4321, lsl 00 // color marron montaña
+ movk x15, 0x65, lsl 16
+ bl dibuja_triangulo
+
+ //---------------------- MONTAÑA 2 ---------------------//
+ mov x21, 350
+ mov x22, 100
+ mov x23, 180
+ mov x24, 140
+ bl dibuja_triangulo
+
+ //---------------------- MONTAÑA 3 --------------------//
+ mov x21, 170
+ mov x22, 170
+ mov x23, 120
+ mov x24, 70
+ bl dibuja_triangulo
+
+ //---------------------- MONTAÑA 4 --------------------//
+ mov x21, 5
+ mov x22, 191
+ mov x23, 100
+ mov x24, 50
+ bl dibuja_triangulo
+
+ //---------------------- MONATAÑA 5 -------------------//
+ mov x21, 450
+ mov x22, 160
+ mov x23, 120
+ mov x24, 80
+ bl dibuja_triangulo
+
+ //---------------------- MONTAÑA 6 -------------------//
+ mov x21, 90  
+ bl dibuja_triangulo
+
+ //---------------------- MONTAÑA 7 ------------------//
+ mov x21, 545
+ bl dibuja_triangulo
+
+//----------------- PARTES NEVADAS -------------------//
+
+ mov x21, 280  
+ mov x22, 70    
+ mov x23, 59  
+ mov x24, 50  
+ movz x15, 0xE0E0, lsl 00
+ movk x15, 0xE0, lsl 16     //color blanco
+ bl dibuja_triangulo
+
+ mov x21, 350
+ mov x22, 100
+ mov x23, 65
+ bl dibuja_triangulo
+
+ mov x21, 170
+ mov x22, 170
+ mov x23, 35
+ mov x24, 20
+ bl dibuja_triangulo
+
+ mov x21, 5
+ mov x22, 191
+ mov x23, 48
+ mov x24, 24
+ bl dibuja_triangulo
+
+ mov x21, 450
+ mov x22, 160
+ mov x23, 45
+ mov x24, 30
+ bl dibuja_triangulo
+
+ mov x21, 90
+ mov x22, 160
+ mov x23, 35
+ mov x24, 20
+ bl dibuja_triangulo
+
+ mov x21, 545
+ bl dibuja_triangulo
+ 
+ ldr x30, [sp], #16
+
+ ret
 
 InfLoop:
 	b InfLoop
