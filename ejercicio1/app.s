@@ -212,5 +212,248 @@ loop0b:
 	movk x15, 0x00FF, lsl 16
 	bl dibuja_cuadrado
 
+ bl dibuja_cuadrado
+
+	mov x0, x20					// PARTE DEL BAUL
+	mov x21, #325 	// (centrado a la mitad de la pantalla)
+	mov x22, #280 	
+	mov x23, #180	
+	mov x24, #200	
+	mov x25, #20	
+	// no cambio
+	bl dibuja_trapecio
+
+	mov x0, x20 				// LUZ 1
+	mov x21, #225	
+	mov x22, #320	
+	mov x23, #40	
+	mov x24, #20	
+	movz x15, 0xFF00, lsl 00	//amarillo
+	movk x15, 0x00FF, lsl 16
+	movk x15, 0x00FF, lsl 32
+	bl dibuja_cuadrado
+
+	mov x0, x20 				// LUZ 2
+	mov x21, #385	
+	mov x22, #320	
+	mov x23, #40	
+	mov x24, #20	
+	// no cambio
+	bl dibuja_cuadrado
+
+	mov x0, x20 				// PATENTE DEL AUTO
+	mov x21, #298	
+	mov x22, #320	
+	mov x23, #55	
+	mov x24, #35	
+	movz x15, 0xFFFF, lsl 00	//blanco
+	movk x15, 0xFFFF, lsl 16
+	movk x15, 0xFFFF, lsl 32
+	bl dibuja_cuadrado	
+
+	mov x0, x20	// PARTE DE ARRIBA (TECHO)
+	mov x21, #325 	 
+	mov x22, #230 	
+	mov x23, #140	
+	mov x24, #170	
+	mov x25, #50	
+	movz x15, 0x4010, lsl 00	//rojo anaranjado
+	movk x15, 0x00C0, lsl 16
+	movk x15, 0x00FF, lsl 16	
+	bl dibuja_trapecio
+
+	mov x0, x20					// VENTANA TRASERA
+	mov x21, #325 	
+	mov x22, #240 	
+	mov x23, #120	
+	mov x24, #140	
+	mov x25, #40	
+	movz x15, 0x1E1E, lsl 00    //gris oscuro sombra
+	movk x15, 0x001E, lsl 16    
+	movk x15, 0x00FF, lsl 32 
+	bl dibuja_trapecio
+
+	mov x0, x20	//  SOMBRA
+	mov x21, #235	
+	mov x22, #385	
+	mov x23, #180	
+	mov x24, #35	
+	bl dibuja_cuadrado
+
+	mov x0, x20 				// RUEDA 1
+	mov x21, #235	
+	mov x22, #385	
+	mov x23, #45	
+	mov x24, #30	
+	movz x15, 0x00, lsl 00	//negro
+	bl dibuja_cuadrado
+
+	mov x0, x20 				// RUEDA 2
+	mov x21, #370	
+	mov x22, #385	
+	mov x23, #45	
+	mov x24, #30	
+	bl dibuja_cuadrado
+
+	//-------------NUBES-------------//
+
+	movz x15, 0xDCDC, lsl 00	// gris claro
+	movk x15, 0xFFDC, lsl 16
+
+	// nube1
+        // Círculo central
+        mov x3, 135       // centro_x
+        mov x4, 85       // centro_y
+        mov x5, 35        // radio
+        bl dibuja_circulos
+
+        // Círculo izquierda
+        mov x3, 85
+        mov x4, 90
+        mov x5, 30
+        bl dibuja_circulos
+
+        // Círculo derecha
+        mov x3, 180
+        mov x4, 90
+        mov x5, 30
+        bl dibuja_circulos
+
+        // Círculo arriba izquierda
+        mov x3, 105
+        mov x4, 60
+        mov x5, 30
+        bl dibuja_circulos
+
+        // Círculo arriba derecha
+        mov x3, 155
+        mov x4, 60
+        mov x5, 30
+        bl dibuja_circulos
+        
+        // nube2
+        mov x3, 430
+        mov x4, 100
+        mov x5, 25
+        bl dibuja_circulos
+
+        mov x3, 405
+        mov x4, 105
+        mov x5, 23
+        bl dibuja_circulos
+
+        mov x3, 455
+        mov x4, 105
+        mov x5, 23
+        bl dibuja_circulos
+
+        mov x3, 415
+        mov x4, 85
+        mov x5, 20
+        bl dibuja_circulos
+
+        mov x3, 445
+        mov x4, 85
+        mov x5, 20
+        bl dibuja_circulos
+
+//------------ ARBOLES --------------
+        // ARBOL IZQUIERDA
+	mov x21, #75   // x
+	mov x22, #200  // y
+        mov x24, #70  //alto del cuadrado
+        mov x23, #25   //ancho del cuadra
+	movz x15, 0x0066, lsl 16   
+	movk x15, 0x3300, lsl 00
+        bl dibuja_cuadrado
+
+        movz X15, 0x0033, lsl 16   
+        movk x15, 0x6600, lsl 00
+        mov x3, 70
+        mov x4, 110
+        mov x5, 25
+        bl dibuja_circulos
+
+        mov x3, 110
+        mov x4, 110
+        mov x5, 25
+        bl dibuja_circulos
+        
+        mov x3, 50
+        mov x4, 140
+        mov x5, 25
+        bl dibuja_circulos
+
+        mov x3, 135
+        mov x4, 130
+        mov x5, 25
+        bl dibuja_circulos
+
+        mov x3, 50
+        mov x4, 185
+        mov x5, 27
+        bl dibuja_circulos
+        
+        mov x3, 130
+        mov x4, 180
+        mov x5, 33
+        bl dibuja_circulos
+
+        mov x3, 90
+        mov x4, 165
+        mov x5, 47
+        bl dibuja_circulos
+        
+        //ARBOL DERECHA
+         
+        mov x21, #525
+	mov x22, #200
+        mov x24, #100 //alto del cuadrado
+        mov x23, #40 //ancho del cuadra
+	movz x15, 0x0066, lsl 16   
+	movk x15, 0x3300, lsl 00
+        bl dibuja_cuadrado
+
+        movz x15, 0x0033, lsl 16   
+        movk x15, 0x6600, lsl 00
+        mov x3, 510 
+        mov x4, 110
+        mov x5, 50
+        bl dibuja_circulos
+
+        mov x3, 570
+        mov x4, 110
+        mov x5, 50
+        bl dibuja_circulos
+
+        mov x3, 500
+        mov x4, 140
+        mov x5, 50
+        bl dibuja_circulos
+        
+        mov x3, 500
+        mov x4, 140
+        mov x5, 50
+        bl dibuja_circulos
+
+        mov x3, 585
+        mov x4, 145
+        mov x5, 50
+        bl dibuja_circulos
+
+        mov x3, 500
+        mov x4, 190
+        mov x5, 50
+        bl dibuja_circulos
+        
+        mov x3, 580
+        mov x4, 190
+        mov x5, 50
+        bl dibuja_circulos
+
+        mov x3, 550
+        mov x4, 170
+        mov x5, 75
+
 InfLoop:
 	b InfLoop
