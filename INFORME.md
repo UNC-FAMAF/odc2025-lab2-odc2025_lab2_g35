@@ -1,8 +1,8 @@
 Nombre y apellido 
-Integrante 1: 
-Integrante 2:
-Integrante 3:
-Integrante 4:
+Integrante 1: Yuliana Micaela Aráoz
+Integrante 2: Lucas Nicolás Olmos
+Integrante 3: Gabriel Agustín Mansilla
+Integrante 4: Tsue Ivonne Motosono Pereda
 
 
 Descripción ejercicio 1: 
