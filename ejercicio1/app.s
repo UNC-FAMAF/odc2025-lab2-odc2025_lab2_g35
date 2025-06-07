@@ -454,6 +454,268 @@ loop0b:
         mov x3, 550
         mov x4, 170
         mov x5, 75
+	bl dibuja_circulos
+
+//------------PATENTE-------------------------
+        //PRIMER LETRA
+        mov x21, #300  // x
+	mov x22, #323  // y
+        mov x24, #12    //alto del cuadrado
+        mov x23, #3    //ancho del cuadra
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #309  
+	mov x22, #323  
+        mov x24, #12    
+        mov x23, #3    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #302  
+	mov x22, #321  
+        mov x24, #3    
+        mov x23, #8    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #302  
+	mov x22, #334  
+        mov x24, #3    
+        mov x23, #8    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+        //SEGUNDA LETRA
+        mov x21, #320  
+	mov x22, #323  
+        mov x24, #12    
+        mov x23, #3   	
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #328  
+	mov x22, #323  
+        mov x24, #12    
+        mov x23, #3    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #320 
+	mov x22, #321  
+        mov x24, #3    
+        mov x23, #9    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #320  
+	mov x22, #334  
+        mov x24, #3    
+        mov x23, #9    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        //TERCER LETRA
+        mov x21, #338  
+	mov x22, #323  
+        mov x24, #12    
+        mov x23, #3    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #341  
+	mov x22, #321  
+        mov x24, #3    
+        mov x23, #7    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        
+        mov x21, #340  
+	mov x22, #334  
+        mov x24, #3    
+        mov x23, #8    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+	mov x21, #347  
+        mov x22, #323  
+        mov x24, #3    
+        mov x23, #3    
+        movz x15, 0x0000, lsl 16
+        movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+	mov x21, #347  
+        mov x22, #332  
+        mov x24, #3    
+        mov x23, #3    
+        movz x15, 0x0000, lsl 16
+        movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+//---------PRIMER NUMERO---------------
+        mov x21, #300  
+	mov x22, #350  
+        mov x24, #3    
+        mov x23, #9    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #300  
+	mov x22, #347  
+        mov x24, #3    
+        mov x23, #3    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #303 
+	mov x22, #344  
+        mov x24, #3    
+        mov x23, #3    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #306  
+	mov x22, #341  
+        mov x24, #3    
+        mov x23, #3    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #300  
+	mov x22, #339  
+        mov x24, #3    
+        mov x23, #7    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+//----------SEGUNDO NUMERO--------------        
+        mov x21, #313  
+	mov x22, #341  
+        mov x24, #11    
+        mov x23, #3    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+         mov x21, #322  
+	mov x22, #341  
+        mov x24, #11    
+        mov x23, #3    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #315  
+	mov x22, #339  
+        mov x24, #3    
+        mov x23, #8    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #315  
+	mov x22, #350  
+        mov x24, #3    
+        mov x23, #8    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+//-------------TERCER NUMERO-------------
+        mov x21, #328  
+	mov x22, #350  
+        mov x24, #3    
+        mov x23, #9    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #328  
+	mov x22, #347  
+        mov x24, #3    
+        mov x23, #3    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #331 
+	mov x22, #344  
+        mov x24, #3    
+        mov x23, #3    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #334  
+	mov x22, #341  
+        mov x24, #3    
+        mov x23, #3    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #328  
+	mov x22, #339  
+        mov x24, #3    
+        mov x23, #7    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+//---------------CUARTA LETRA-----------------------
+        mov x21, #348  
+	mov x22, #345  
+        mov x24, #6    
+        mov x23, #3    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #342  
+	mov x22, #350  
+        mov x24, #3    
+        mov x23, #7    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #342  
+	mov x22, #344  
+        mov x24, #3    
+        mov x23, #7   
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #342  
+	mov x22, #341  
+        mov x24, #7    
+        mov x23, #3    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
+
+        mov x21, #342  
+	mov x22, #339  
+        mov x24, #3    
+        mov x23, #9    
+	movz x15, 0x0000, lsl 16   
+	movk x15, 0x0000, lsl 00
+        bl dibuja_cuadrado
 
 InfLoop:
 	b InfLoop
