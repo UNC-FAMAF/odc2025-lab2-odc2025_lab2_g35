@@ -1,8 +1,8 @@
 Nombre y apellido 
-Integrante 1: Yuliana Micaela Aráoz
-Integrante 2: Lucas Nicolás Olmos
-Integrante 3: Gabriel Agustín Mansilla
-Integrante 4: Tsue Ivonne Motosono Pereda
+Integrante 1: Yuliana Micaela Aráoz, DNI:46709798.
+Integrante 2: Lucas Nicolás Olmos, DNI:38250914.
+Integrante 3: Gabriel Agustín Mansilla, DNI:46506665.
+Integrante 4: Tsue Ivonne Motosono Pereda, DNI:96009448.
 
 
 Descripción ejercicio 1: Imagen de un auto anaranjado viajando por una carretera hacia las sierras.
