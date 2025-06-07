@@ -716,6 +716,198 @@ loop0b:
 	movz x15, 0x0000, lsl 16   
 	movk x15, 0x0000, lsl 00
         bl dibuja_cuadrado
+        //-----SUBRUTINAS-----//
+
+dibuja_circulos:
+    mul x6, x5, x5        // radio^2
+    sub x8, x3, x5        // x_min = centro_x - radio
+    add x9, x3, x5        // x_max = centro_x + radio
+    sub x11, x4, x5       // y_min = centro_y - radio
+    add x12, x4, x5       // y_max = centro_y + radio
+
+loop_circ_y:
+    mov x2, x8            // x = x_min
+loop_circ_x:
+    // dx = x - cx
+    sub x13, x2, x3
+    mul x13, x13, x13     // dx^2
+    // dy = y - cy
+    sub x14, x11, x4
+    mul x14, x14, x14     // dy^2
+    add x7, x13, x14      // dx^2 + dy^2
+    cmp x7, x6
+    b.ge skip
+
+    // Calcula offset = (y * WIDTH + x) * 4
+    mov x16, SCREEN_WIDTH
+    mul x17, x11, x16
+    add x17, x17, x2
+    lsl x17, x17, 2       // * 4
+    add x17, x17, x20     // framebuffer + framebuffer base
+    stur w15, [x17]       // escribir pixel
+
+skip:
+    add x2, x2, 1
+    cmp x2, x9
+    ble loop_circ_x
+
+    add x11, x11, 1
+    cmp x11, x12
+    ble loop_circ_y
+    ret
+
+
+dibuja_trapecio:
+
+        // x21: x_start x del centro superior del trapecio (por ejemplo, 320 si e
+        // x22: y_start y inicial (arriba del trapecio)
+        // x23: ancho superior
+        // x24: ancho inferior
+        // x25: altura
+        // x15: color
+
+        mov x10, #0             // fila y actual (dy)
+loop_trp_y:
+
+        // para calcular el ancho de cada fila:
+        // ancho_actual = a_sup + (a_inf - a_sup) * (dy / altura)
+
+        sub x11, x24, x23               // a_inf - a_sup
+        mul x11, x11, x10               // (a_inf - a_sup) * dy
+        udiv x11, x11, x25              // (a_inf - a_sup) * dy / altura
+        add x11, x11, x23               // ancho actual = a_sup + (a_inf - a_sup)
+
+        // calculo donde va a empezar a pintar (x_offset)
+        // x_offset = x_start - ancho_actual / 2
+        lsr x13, x11, #1
+        sub x12, x21, x13
+
+        // y = y_start + dy
+        add x4, x22, x10
+
+        // NOTA: x11: ancho_actual
+        //               x13: mitad del ancho
+        //               x12: coordenada x inicial de la fila actual
+
+        // Ciclo para columnas
+    mov x9, #0          // columna x actual (dx)
+
+loop_trp_x:
+    add x3, x12, x9     // x = x_offset  + col
+
+        // Dirección = base + 4 * (x + y * SCREEN_WIDTH)
+    mov x7, #640
+    mul x8, x4, x7
+    add x8, x8, x3
+    lsl x8, x8, #2
+    add x8, x0, x8
+
+        stur w15, [x8]
+
+        add x9, x9, #1
+    cmp x9, x11                 // dx < ancho_actual
+    blt loop_trp_x
+
+    // siguiente fila
+    add x10, x10, #1
+    cmp x10, x25                // dy < altura
+    blt loop_trp_y
+
+    ret
+
+dibuja_cuadrado:
+
+        // coordenadas en las que empieza, alto y ancho del cuadrado
+        // x21  x_start 
+        // x22  y_start
+        // x23  ancho
+        // X24  alto
+        // x15  color
+
+        // inicializo filas y columnas (es como un ciclo anidado)
+        mov x25, #0     // dir_y = 0 (filas)
+loop4:
+        mov x26, #0             // dir_x = 0 (columnas)
+loop3:
+
+        // calculo coordenadas 
+        add x3, x26, x21        // x
+        add x4, x25, x22        // y
+
+        // calculo direccion en memoria
+        // Dirección = Dirección de inicio + 4 * [x + (y * 640)] 
+
+        mov x6, #640
+        mul x5, x4, x6  // y * 640->(SCREEN_WIDTH)
+        add x5, x5, x3                          // x + (y*640)
+        lsl x5, x5, #2                          // 4*(x+(y*640))
+        add x7, x0, x5                          // dir base + 4 * [x + (y * 640)]
+
+        stur w15, [x7]          // pinto el pixel de negro
+
+        // sumo 1 a las columnas
+        add x26, x26, #1
+        cmp x26, x23
+        b.lt loop3
+
+        // sumo 1 a las filas
+        add x25, x25, #1
+        cmp x25, x24
+        b.lt loop4
+        
+        ret
+
+dibuja_triangulo:
+    // x21: x_start
+    // x22: y_start
+    // x23: base (ancho de la base del triángulo)
+    // x24: altura (altura del triángulo)
+    // x15: color (nuevo parámetro para el color)
+
+    mov x10, 0  // fila y actual (dy)
+loop_tri_y:
+
+    // Calculo el ancho de cada fila según la proporción de la altura
+    // ancho_actual = base * (dy / altura)
+
+    mul x11, x23, x10   // base * dy
+    udiv x11, x11, x24  // (base * dy) / altura
+
+    // Calcula la posición de inicio de la fila actual
+    // x_offset = x_start - ancho_actual / 2
+    lsr x13, x11, 1
+    sub x12, x21, x13
+
+    // y = y_start + dy
+    add x4, x22, x10
+
+    // Ciclo para columnas
+    mov x9, 0  // columna x actual (dx)
+
+loop_tri_x:
+    add x3, x12, x9  // x = x_offset + col
+
+    // Dirección = base + 4 * (x + y * SCREEN_WIDTH)
+    mov x7, SCREEN_WIDTH
+    mul x8, x4, x7
+    add x8, x8, x3
+    lsl x8, x8, 2
+    add x8, x0, x8
+
+    stur w15, [x8]  // colorear el pixel con x15
+
+    add x9, x9, 1
+    cmp x9, x11  // dx < ancho_actual
+    blt loop_tri_x
+    // siguiente fila
+    add x10, x10, 1
+    cmp x10, x24  // dy < altura
+    blt loop_tri_y
+
+    ret
+
+        //---------------------------------------------------------------
+        // Infinite Loop
 
 InfLoop:
 	b InfLoop
